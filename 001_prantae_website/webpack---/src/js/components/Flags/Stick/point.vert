@@ -1,0 +1,1 @@
+export default "precision highp float;\n#define GLSLIFY 1\n\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\n\nattribute vec3 position;\nattribute vec2 uv;\n\nvarying vec2 vUv;\n\nvoid main() {\n\tvec4 mvPosition = modelViewMatrix * vec4(position, 1.0);\n\n\tgl_Position = vec4(projectionMatrix * mvPosition);\n\n  vUv = uv;\n}\n";

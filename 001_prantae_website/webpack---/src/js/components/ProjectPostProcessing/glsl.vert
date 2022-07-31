@@ -1,0 +1,1 @@
+export default "#define GLSLIFY 1\nvarying vec2 vUv;\nvarying float vProgress;\n\nuniform float uProgressSide;\nuniform float uDirection;\n\nvoid main() {\n  vUv = uv;\n  vProgress = -(.5 * (1. - uProgressSide)) * uDirection;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}\n";
