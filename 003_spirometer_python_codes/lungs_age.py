@@ -18,6 +18,7 @@ def get_data(x):
             #return ('Device Paired at '+x)
                 ser.write(b'2')
                 if  ser.read() == b'2':
+                    print("Device Paired")
                     while True:
                         if (float(ser.readline().strip()) > 15.0 ) :
                             t_d_end = time.time() + 5
@@ -77,7 +78,10 @@ def lungs_age(ratio,patient_age):
 
 if __name__ == "__main__": 
     
-    ratio=get_data('COM9')
+    
+
+        
+    ratio=get_data('COM7')
     patient_age=22
     result=lungs_age(ratio,patient_age)
     print(result)

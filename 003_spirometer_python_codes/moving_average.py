@@ -1,7 +1,7 @@
 import serial
 import time
 from matplotlib import pyplot as plt
-ser=serial.Serial('COM9',115200)
+ser=serial.Serial('COM7',115200)
 window_size = 50
 i = 0
 data_lst=[]
@@ -19,17 +19,20 @@ def chunkIt(seq, num):
 
     return out
 while  ser.isOpen() :
-
-    if (float(ser.readline().strip()) > 15.0 ) :
-        t_d_end = time.time() + 5
-        while time.time() < t_d_end :
-            x=float(ser.readline().strip())
-            data_lst.append(x)
-        ser.close()
-        break
-            
-    else :
-        print("-- Blow into device --")
+    try:
+        
+        if (float(ser.readline().strip()) > 15.0 ) :
+            t_d_end = time.time() + 5
+            while time.time() < t_d_end :
+                x=float(ser.readline().strip())
+                data_lst.append(x)
+            ser.close()
+            break
+                
+        else :
+            print("-- Blow into device --")
+    except :
+        pass
      
 
 print(data_lst)

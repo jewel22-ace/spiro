@@ -1,6 +1,6 @@
 import serial
 import time
-ser=serial.Serial('COM9',115200)
+ser=serial.Serial('COM7',115200)
 
 data_lst=[]
 moving_averages = []
