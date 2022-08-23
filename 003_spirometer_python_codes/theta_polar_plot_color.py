@@ -20,7 +20,7 @@ data_lst=[]
 while  ser.isOpen() :
 
     if (float(ser.readline().strip()) > 15.0 ) :
-        t_d_end = time.time() + 2
+        t_d_end = time.time() + 10
         while time.time() < t_d_end :
             x=float(ser.readline().strip())
             data_lst.append(x)
@@ -39,30 +39,42 @@ for i in range (0,len(data_lst)):
     theta_360.append(x)
 colors=[]
 area=[]
-offset=np.arange(0,len(data_lst))
-final_lst=[]
-for k in range(0,len(data_lst)):
-    final_lst.append(data_lst[k]+offset[k])
-    print(final_lst)
+#offset=np.arange(0,len(data_lst))
+#=[]
+#for k in range(0,len(data_lst)):
+#    final_lst.append(data_lst[k]+offset[k])
+#    print(final_lst)
     
 for r in data_lst:
-    if r >= 0 and r <= 30 :
+    if r > 0 and r <= 30 :
         colors.append('green')
-    elif r > 30 and r <= 70 :
+    elif r > 30 and r <= 60 :
         colors.append('yellow')
-    elif r > 70 and r <= 100 :
-        colors.append('blue')
-    elif r > 100 :
+    elif r > 60 and r <= 90 :
+        colors.append('orange')
+    elif r > 90 :
         colors.append('red')
-    else :
-        colors.append('black')
-        
-    a=10
-    area.append(a)
+    elif r <= 0 and r > -30 :
+        colors.append('blue')
+    elif r <= -30 and r > -60 :
+        colors.append('indigo')
+    elif r <= -60 and r > -90 :
+        colors.append('aqua')
+    elif r <=-90 :
+        colors.append('coral')
+    
+    if r > 0 :
+        a=5*r
+        area.append(a)
+    elif r < 0 :
+        a=-5*r
+        area.append(a)
+    else:
+        area.append(5)
 
 
 fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
-ax.scatter(theta_360,final_lst,c=colors,s=area)
+ax.scatter(theta_360,data_lst,c=colors,s=area)
 ax.grid(True)
 
 ax.set_title("A line plot on a polar axis", va='bottom')

@@ -9,12 +9,13 @@ import time
 from matplotlib import pyplot as plt
 import math
 import numpy as np
+import pandas as pd
 ser=serial.Serial('COM7',115200)
 data_lst=[]
 while  ser.isOpen() :
 
     if (float(ser.readline().strip()) > 15.0 ) :
-        t_d_end = time.time() + 2
+        t_d_end = time.time() + 10
         while time.time() < t_d_end :
             x=float(ser.readline().strip())
             data_lst.append(x)
@@ -36,6 +37,11 @@ final_lst=[]
 for k in range(0,len(data_lst)):
     final_lst.append(data_lst[k]+offset[k])
     print(final_lst)
+
+dic={"Spiro_Data":data_lst}
+df=pd.DataFrame(dic)
+df.to_csv('Spiro_data.csv')
+
 
 fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
 ax.plot(theta_360,final_lst)
