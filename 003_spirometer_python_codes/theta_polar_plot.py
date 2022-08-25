@@ -15,7 +15,7 @@ data_lst=[]
 while  ser.isOpen() :
 
     if (float(ser.readline().strip()) > 15.0 ) :
-        t_d_end = time.time() + 10
+        t_d_end = time.time() + 15
         while time.time() < t_d_end :
             x=float(ser.readline().strip())
             data_lst.append(x)
@@ -40,7 +40,7 @@ for k in range(0,len(data_lst)):
 
 dic={"Spiro_Data":data_lst}
 df=pd.DataFrame(dic)
-df.to_csv('Spiro_data.csv')
+df.to_csv('Spiro_data_1.csv')
 
 
 fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
